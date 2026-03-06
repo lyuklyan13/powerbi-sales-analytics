@@ -99,3 +99,26 @@ Transforming data into actionable business strategies:
       during specific months.
     * *Recommendation:* Optimize inventory levels for top-performing  `dim_products` ahead of these  
        historical peaks and allocate marketing budgets to capitalize on high-traffic periods.
+
+
+
+### ⏳ Next Steps & Work in Progress
+
+This project is actively being developed. To provide a deeper level of analytical rigor and a  
+better user experience, the following deliverables are currently in progress and will be    
+published to this repository soon:
+
+* **Interactive Demonstration (** `/images` **):** A short GIF animation and a 2-minute video  
+    presentation  walking through the dynamic cross-filtering, drill-down capabilities, and  
+    actionable insights of the Power BI dashboard.
+* **Advanced Analytical Reports (** `/reports` **directory):**
+  * `Data Quality Report.pdf`: A comprehensive audit of the dataset's hygiene,  
+     structural integrity, and applied ETL rules.
+  * `EDA.pdf` (Exploratory Data Analysis): Statistical summaries, univariate/bivariate  
+     analysis, and data distributions.
+  * `RFM.pdf`: Detailed methodology and mathematical scoring behind the Recency,  
+     Frequency, and Monetary customer segmentation.
+  * `Customers.pdf`: A deep dive into customer portfolio analysis, geographic distribution,  
+     and lifetime value concepts.
+
+      
