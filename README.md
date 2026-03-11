@@ -1,124 +1,98 @@
-## **E-Commerce Sales & Customer Analytics Portfolio Project**
-### **Project Overview**
-This project is an end-to-end Data Analytics solution designed to extract actionable business    
-insights from a transnational retail dataset. It covers the entire data lifecycle: from raw data  
-ingestion and ETL processing in Power Query, to relational data modeling (Star Schema), and  
-finally, dynamic visualization in Power BI.  
+# 📊 E-Commerce Sales & Customer Analytics Dashboard 🛒✨
 
+Welcome to my Data Analytics portfolio project! This repository contains an end-to-end  
+Business Intelligence solution designed to extract actionable insights from a transactional retail dataset.
 
-### 1. Data Import & Infrastructure  
-The dataset used for this project is the Tata Online Retail dataset, containing transnational    
-transactions occurring between 2010 and 2011.  
-* **Source:** Kaggle (Tata Online Retail Dataset) - https://www.kaggle.com/datasets/ishanshrivastava28/tata-online-retail-dataset
-* **Size:** ~500,000+ rows, 8 columns
-* **Infrastructure:** Raw data (online_retail.csv) is version-controlled using Git LFS due  
-  to its large size (>50MB). The data was imported directly into Power BI via Power Query for  
-  the ETL process.
+--- 
 
-### 2. Data Profiling & Cleansing
-Data quality assessment and transformation were performed using Power Query.
+## 🛠 Tools Used
+- Excel
+- Power Query (ETL)
+- Power Pivot (Data Modeling)
+- Power BI
+- DAX
+- GitHub LFS
+---
 
-**Data Profiling:** Evaluated using Power Query's `Column Quality`, `Column Distribution`, and  
-`Column Profile` features based on the entire dataset.
+## 📂 Data Source Description
+The dataset used for this project is the Tata Online Retail dataset,  
+containing transnational transactions occurring between 2010 and 2011.  
+Source:  [TATA: Online Retail Dataset](https://www.kaggle.com/datasets/ishanshrivastava28/tata-online-retail-dataset)
 
-**Data Dictionary & Transformation Logic:**  
-The dataset was rigorously cleaned to ensure accuracy for revenue and customer-level analytics:
+---
 
-| Column Name | Data Type | Description & Cleaning Logic |
-|---|---|---|
-| `InvoiceNo` | Text | Unique transaction identifier, contains no null values. Since the focus is on revenue analysis, transactions containing "C" (cancellations/returns) were explicitly excluded. |
-| `StockCode` | Text | Product identifier. Verified to contain no errors or null values. |
-| `Description` | Text | Product name. Less than 1% of records were empty. Since these also lacked a CustomerID and had a UnitPrice = 0 (providing no value for revenue analysis), they were removed. |
-| `Quantity` | Whole number | Item quantity. Filtered to include only values > 0. |
-| `InvoiceDate` | Date | Date and time of the transaction. Contains no errors or null values. Extracted temporal dimensions (Year, MonthNumber, MonthName, Quarter) to support time-series revenue analysis (for the `dim_date` table). |
-| `UnitPrice` | Currency | Price per unit. Filtered to include only values > 0. |
-| `CustomerID` | Whole number | Customer identifier. Approximately 25% of records contained null values; these were removed to enable accurate customer-level analytics. |
+# 📄 Dashboard Pages Overview
 
+## 📊 Page 1: Executive Overview
+This page provides a high-level summary of business performance, focusing on:
 
+- Total Revenue
+- Month-over-Month Growth
+- Regional Profitability
 
+![Executive Overview](images/dashboard_page1.png)
 
-### 3. Data Modeling & Transformation  
+---
 
-The normalized tables were structured into a **Star Schema** to optimize filtering and DAX  
-measure calculations.  
+## 👥 Page 2: Customer Analytics & Segmentation (RFM)
 
-* **Fact Table:** `fact_transactions` (contains quantitative data: sales, quantities, dates, and  
-  foreign keys).  
-* **Dimension Tables:** `dim_customers`, `dim_products`, `dim_date`.  
+This page identifies the most valuable customers using:
 
-**Technical Challenge Solved:**  
-During the creation of the 1-to-Many relationship between `dim_products` and  
-`fact_transactions` via `StockCode`, Power Pivot detected duplicates in the dimension table  
-despite Power Query showing unique values. This occurred because **Power Query is case-sensitive,  
-whereas Power Pivot is not.**  
+- **RFM Analysis**
+- **Pareto Analysis (80/20 rule)**
 
-* *Solution:* Applied `TRIM` and `UPPERCASE` functions in Power Query to key columns  
-  (`StockCode`, `CustomerID`, `InvoiceDate`) to standardize formatting, remove hidden  
-  spaces, and successfully build the relationships.
+*(Note: While the Pareto analysis revealed that the top 20% of the customer base drives 80% of  
+the total revenue, the visual explicitly highlights the Top 20 absolute VIP customers for focused  
+account management)*
 
-[See Data Model Architecture below](images/star_schema.png)
+![Customer Analytics](images/dashboard_page2.png)
 
+---
 
-### 4. Dashboard Construction
-The analytical dashboard was built in Power BI, utilizing advanced DAX measures (Total Revenue,  
-Average Order Value, MoM Growth, etc.). It consists of three core pages to answer specific business questions:
+## ⚙️ Page 3: Growth & Operations
 
-* **Page 1: Executive Overview**
+This page analyzes:
 
-  *Answers: "How is the business performing overall?"*
+- Seasonal trends
+- Order volumes
+- Revenue concentration risk
 
-  Features high-level KPIs, revenue trends over time, top 10 products, and top-performing  
-  geographic regions.
+These insights help optimize inventory supply and operational planning.
 
-* **Page 2: Customer Analytics**
+![Growth & Operations](images/dashboard_page3.png)
 
-  *Answers: "Who are our customers and how should we engage them?"*
+---
 
-  Highlights Customer Segmentation, Pareto Analysis (identifying the top 20% of  
-  customers), and Revenue per Segment.
+# 🧩 Data Modeling Process
 
-* **Page 3: Growth & Operations**
+The data was cleaned using **Power Query** and modeled into a highly optimized  
+**Star Schema** to support fast **DAX calculations** and filtering.
 
-  *Answers: "When do people buy and what drives profitability?"*
+![Star Schema](images/star_schema.png)
+
+---
+
+# 💡 Top 3 Business Insights
+
+### 1️⃣ Revenue Concentration Risk
+The analysis confirmed the Pareto Principle: approximately **80% of total revenue is  
+generated by just 20% of the customer base (top 870 clients).** This creates a **revenue  
+dependency risk** and highlights the need to diversify the revenue stream.
+
+### 2️⃣ Seasonality Peaks
+Sales exhibit strong **seasonality**, with massive spikes during **Q4**.  
+Inventory planning should anticipate these historical peaks.
+
+### 3️⃣ Customer Retention Opportunity
+Moving **"Potential Loyalists"** into the **"Champions"** segment through targeted email  
+campaigns can significantly increase overall **ROI**.
+
+---
+
+# 📁 Comprehensive Project Documentation
+
+For a deeper dive into the project, explore the reports:
+
+- 📄 **[Project Report](reports/Project_Report.pdf)**  
   
-  Focuses on Month-over-Month (MoM) Growth %, seasonal peaks, and revenue  
-  concentration risk.
 
-
-### 5. Key Business Insights & Recommendations
-Transforming data into actionable business strategies:
-1. **Revenue Concentration Risk:**
-    * *Insight:* The analysis revealed that a significant portion of total revenue is generated  
-      by a very small segment of top customers.
-    * *Recommendation:* While nurturing these 'Champions' is critical, the business must  
-      mitigate risk by running targeted campaigns to convert 'Potential Loyalists' and recent  
-      buyers into frequent shoppers to diversify the revenue stream.
-
-2. **Seasonality & Inventory Operations:**
-    * *Insight:* Sales exhibit strong seasonality, with massive spikes in transaction volume  
-      during specific months.
-    * *Recommendation:* Optimize inventory levels for top-performing  `dim_products` ahead of these  
-       historical peaks and allocate marketing budgets to capitalize on high-traffic periods.
-
-
-
-### ⏳ Next Steps & Work in Progress
-
-This project is actively being developed. To provide a deeper level of analytical rigor and a  
-better user experience, the following deliverables are currently in progress and will be    
-published to this repository soon:
-
-* **Interactive Demonstration (** `/images` **):** A short GIF animation and a 2-minute video  
-    presentation  walking through the dynamic cross-filtering, drill-down capabilities, and  
-    actionable insights of the Power BI dashboard.
-* **Advanced Analytical Reports (** `/reports` **directory):**
-  * `Data Quality Report.pdf`: A comprehensive audit of the dataset's hygiene,  
-     structural integrity, and applied ETL rules.
-  * `EDA.pdf` (Exploratory Data Analysis): Statistical summaries, univariate/bivariate  
-     analysis, and data distributions.
-  * `RFM.pdf`: Detailed methodology and mathematical scoring behind the Recency,  
-     Frequency, and Monetary customer segmentation.
-  * `Customers.pdf`: A deep dive into customer portfolio analysis, geographic distribution,  
-     and lifetime value concepts.
-
-      
